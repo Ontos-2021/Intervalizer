@@ -23,7 +23,7 @@ void loop() {
   oled.print("Hola, han pasado: ");
   oled.setCursor(10, 30);
   oled.setTextSize(2);
-  oled.print(millis());
+  oled.print(millis() / 1000);
   oled.print(" seg.");
   oled.display();
 }
