@@ -14,10 +14,10 @@ La función tone() nos permite generar un tono con el buzzer.
 `tone(pin, frequency, duration)`
 
 ## Referencias
-https://juegosrobotica.es/musica-con-arduino/#
-https://www.arduino.cc/reference/en/language/functions/random-numbers/random/
-https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/
-https://www.arduino.cc/reference/en/language/variables/data-types/array/
-https://learn.parallax.com/tutorials/robot/shield-bot/robotics-board-education-shield-arduino/chapter-4-boe-shield-bot-4#:~:text=Using%20the%20sizeof%20Function&text=It%20can%20tell%20you%20both,of%20elements%20in%20the%20array.
-https://www.youtube.com/watch?v=G82X3Z7S5uM
-https://www.youtube.com/watch?v=9ligsi5Bgv8
+[Música con Arduino](https://juegosrobotica.es/musica-con-arduino/#)
+[Documentación función `random()` en Arduino](https://www.arduino.cc/reference/en/language/functions/random-numbers/random/ "Documentación oficial")
+[Documentación función `tone()` en Arduino](https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/ "Documentación oficial")
+[Documentación de array en Arduino](https://www.arduino.cc/reference/en/language/variables/data-types/array/ "Documentación oficial")
+[Uso de la función `sizeof()`](https://learn.parallax.com/tutorials/robot/shield-bot/robotics-board-education-shield-arduino/chapter-4-boe-shield-bot-4#:~:text=Using%20the%20sizeof%20Function&text=It%20can%20tell%20you%20both,of%20elements%20in%20the%20array.)
+[Matriz de botones](https://www.youtube.com/watch?v=G82X3Z7S5uM "Video de YouTube")
+[Teclado Keypad 4x4](https://www.youtube.com/watch?v=9ligsi5Bgv8 "Video de YouTube")
