@@ -8,6 +8,21 @@
 #define LED_G 5
 #define LED_B 3
 
+// Declaramos varialbes para la pantalla OLED
+
+// Estas son las librerías
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+// Estas son las dimensiones de la pantalla OLED
+#define ANCHO 128
+#define ALTO 64
+
+// Acá se instancia el objeto "oled" de la clase "Adafruit_SSD1306".
+// La variable OLED_RESET es propia de un módulo de pantalla fabricado por Adafruit.
+#define OLED_RESET 4 
+Adafruit_SSD1306 oled(ANCHO, ALTO, &Wire, OLED_RESET);
 
 // Array con las frecuencias de las notas músicales. Son dos octavas, de La4 a La6
 double notas_musicales[] = {
@@ -55,9 +70,47 @@ void setup() {
   pinMode(LED_R, OUTPUT);
   pinMode(LED_G, OUTPUT);
   pinMode(LED_B, OUTPUT);
+
+  // Iniciamos la pantalla OLED
+  Wire.begin();
+  oled.begin(SSD1306_SWITCHCAPVCC, 0X3C);
+
+  // Bienvenida al juego
+  oled.clearDisplay();
+  oled.setTextColor(WHITE);
+  oled.setCursor(0, 0);
+  oled.setTextSize(2);
+  oled.println("Bienvenido");
+  oled.setCursor(53, 18);
+  oled.println("a");
+  oled.setCursor(25, 40);
+  oled.setTextSize(1, 2);
+  oled.println("Intervalizer");
+  
+  oled.display();
+  delay(2750);
+
+  oled.clearDisplay();
+  oled.setTextColor(WHITE);
+  oled.setCursor(3, 0);
+  oled.setTextSize(2);
+  oled.println("Entrena tu");
+  oled.setCursor(34, 20);
+  oled.println("oido");
+  oled.setCursor(18, 40);
+  oled.println("musical");
+  oled.display();
+  delay(2400);
 }
 
 void loop() {
+  // Escribimos algo en la pantalla OLED
+  oled.clearDisplay();
+  oled.setCursor(28, 25);
+  oled.setTextSize(1, 2);
+  oled.print("Intervalizer");
+  oled.display();
+  
   // Por ahora no será muy sofisticado el sistema. Elegiré una nota del medio para que nunca me tire error al elegir la segunda nota.
   // Primero elegimos la primera nota al azar
 
