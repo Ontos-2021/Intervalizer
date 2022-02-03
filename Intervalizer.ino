@@ -4,6 +4,10 @@
 #define BOTON_2 4
 #define BOTON_3 7
 #define BOTON_4 8
+#define LED_R 6
+#define LED_G 5
+#define LED_B 3
+
 
 // Array con las frecuencias de las notas músicales. Son dos octavas, de La4 a La6
 double notas_musicales[] = {
@@ -48,6 +52,9 @@ void setup() {
   pinMode(BOTON_2, INPUT);
   pinMode(BOTON_3, INPUT);
   pinMode(BOTON_4, INPUT);
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
 }
 
 void loop() {
@@ -75,9 +82,14 @@ void loop() {
 
  // Ahora emitimos los sonidos
  tone(BUZZER, primer_nota, 200);
+ analogWrite(LED_R, 255);
  delay(400);
+ analogWrite(LED_R, 0);
+ 
  tone(BUZZER, segunda_nota, 200);
+ analogWrite(LED_G, 230);
  delay(400);
+ analogWrite(LED_G, 0);
 
  delay(2700); 
 }
