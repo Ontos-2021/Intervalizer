@@ -54,7 +54,7 @@ double notas_musicales[] = {
 };
 
 // Definimos los intervalos disponibles. En este caso, sólo serán 3ra Mayor, 4ta Justa, 5ta Justa y 6ta mayor.
-double intervalos[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2, -3, -4, -5, -6, -7, -8, -9};
+int intervalos[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2, -3, -4, -5, -6, -7, -8, -9};
 
 void setup() {
   // put your setup code here, to run once:
@@ -101,7 +101,7 @@ void loop() {
   Serial.println(primer_nota);
   
   // Elegimos al azar el intervalo
-  int intervalo = intervalos[random(0,7)];
+  int intervalo = intervalos[random(0,17)];
   Serial.print("Este es el intervalo: ");
   Serial.println(intervalo);
 
@@ -128,7 +128,7 @@ void loop() {
 }
 
 void saludar(){
-    oled.clearDisplay();
+  oled.clearDisplay();
   oled.setTextColor(WHITE);
   oled.setCursor(0, 0);
   oled.setTextSize(2);
