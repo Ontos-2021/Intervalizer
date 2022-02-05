@@ -54,7 +54,7 @@ double notas_musicales[] = {
 };
 
 // Definimos los intervalos disponibles. En este caso, sólo serán 3ra Mayor, 4ta Justa, 5ta Justa y 6ta mayor.
-double intervalos[] = {4, 5, 7, 9, -4, -5, -7, -9};
+double intervalos[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2, -3, -4, -5, -6, -7, -8, -9};
 
 void setup() {
   // put your setup code here, to run once:
@@ -80,31 +80,7 @@ void setup() {
   oled.begin(SSD1306_SWITCHCAPVCC, 0X3C);
 
   // Bienvenida al juego
-  oled.clearDisplay();
-  oled.setTextColor(WHITE);
-  oled.setCursor(0, 0);
-  oled.setTextSize(2);
-  oled.println("Bienvenido");
-  oled.setCursor(53, 18);
-  oled.println("a");
-  oled.setCursor(25, 40);
-  oled.setTextSize(1, 2);
-  oled.println("Intervalizer");
-  
-  oled.display();
-  delay(2250);
-
-  oled.clearDisplay();
-  oled.setTextColor(WHITE);
-  oled.setCursor(3, 0);
-  oled.setTextSize(2);
-  oled.println("Entrena tu");
-  oled.setCursor(34, 20);
-  oled.println("oido");
-  oled.setCursor(18, 40);
-  oled.println("musical");
-  oled.display();
-  delay(2000);
+  saludar();
 }
 
 void loop() {
@@ -149,4 +125,32 @@ void loop() {
  analogWrite(LED_G, 0);
 
  delay(2700); 
+}
+
+void saludar(){
+    oled.clearDisplay();
+  oled.setTextColor(WHITE);
+  oled.setCursor(0, 0);
+  oled.setTextSize(2);
+  oled.println("Bienvenido");
+  oled.setCursor(53, 18);
+  oled.println("a");
+  oled.setCursor(25, 40);
+  oled.setTextSize(1, 2);
+  oled.println("Intervalizer");
+  
+  oled.display();
+  delay(2250);
+
+  oled.clearDisplay();
+  oled.setTextColor(WHITE);
+  oled.setCursor(3, 0);
+  oled.setTextSize(2);
+  oled.println("Entrena tu");
+  oled.setCursor(34, 20);
+  oled.println("oido");
+  oled.setCursor(18, 40);
+  oled.println("musical");
+  oled.display();
+  delay(2000);
 }
