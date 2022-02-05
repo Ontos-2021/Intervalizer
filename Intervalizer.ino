@@ -56,6 +56,22 @@ double notas_musicales[] = {
 // Definimos los intervalos disponibles. En este caso, sólo serán 3ra Mayor, 4ta Justa, 5ta Justa y 6ta mayor.
 int intervalos[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2, -3, -4, -5, -6, -7, -8, -9};
 
+// Definimos los nombres de los intervalos
+String intervalos_nombres[] {
+  "Unisono",
+  "Segunda Menor",
+  "Segunda Mayor",
+  "Tercera Menor",
+  "Tercera Mayor",
+  "Cuarta Justa",
+  "Quinta Justa",
+  "Sexta Menor",
+  "Sexta Mayor",
+  "Septima Menor",
+  "Septima Mayor",
+  "Octava"  
+};
+
 void setup() {
   // put your setup code here, to run once:
   
@@ -91,7 +107,6 @@ void loop() {
   oled.print("Intervalizer");
   oled.display();
   
-  // Por ahora no será muy sofisticado el sistema. Elegiré una nota del medio para que nunca me tire error al elegir la segunda nota.
   // Primero elegimos la primera nota al azar
 
   // Elegimos la primer nota al azar
@@ -108,6 +123,18 @@ void loop() {
 
  // Ahora emitimos los sonidos
  emitirIntervalos(primer_nota, segunda_nota);
+
+ // Ahora generamos las opciones posibles
+ // En este caso serán opcion_correcta, opcion_1, opcion_2, opcion_3
+ // Las 3 restantes serán incorrectas y distintas entre sí.
+ 
+ String opcion_correcta = definirIntervaloCorrecto(intervalo);
+ String opcion_1 = generarIntervaloIncorrecto(intervalo);
+ String opcion_2 = generarIntervaloIncorrecto(intervalo);
+ String opcion_3 = generarIntervaloIncorrecto(intervalo);
+
+ // Ahora imprimimos en la pantalla las opciones
+ imprimirOpciones(opcion_correcta, opcion_1, opcion_2, opcion_3);
 }
 
 void saludar(){
@@ -139,6 +166,7 @@ void saludar(){
 }
 
 double elegirPrimerNota(int numero_random) {
+  // Por ahora no será muy sofisticado el sistema. Elegiré una nota del medio para que nunca me tire error al elegir la segunda nota.
   double primer_nota = notas_musicales[numero_random]; // En este caso, se podrá elegir desde la novena nota hasta la décimosexta.
   Serial.print("Esta es la primer nota: ");
   Serial.println(primer_nota);
@@ -171,4 +199,38 @@ void emitirIntervalos(double primer_nota, double segunda_nota){
  analogWrite(LED_G, 0);
 
  delay(2700); 
+}
+
+String definirIntervaloCorrecto(int intervalo){
+  if (intervalo < 0) {
+    intervalo = intervalo * -1;
+  }
+  return intervalos_nombres[intervalo];
+}
+
+String generarIntervaloIncorrecto(int intervalo) {
+  int intervalo_incorrecto = random(0, 11);
+  while (intervalo == intervalo_incorrecto) {
+    intervalo_incorrecto = random(0, 11);
+  };
+  return intervalos_nombres[intervalo_incorrecto];
+}
+
+void imprimirOpciones(String opcion_correcta, String opcion_1, String opcion_2, String opcion_3) {
+  oled.clearDisplay();
+  oled.setTextColor(WHITE);
+  oled.setCursor(0, 0);
+  oled.setTextSize(1);
+  
+  oled.print("Opcion 1: ");
+  oled.println(opcion_1);
+  oled.print("Opcion 2: ");
+  oled.println(opcion_2);
+  oled.print("Opcion 3: ");
+  oled.println(opcion_3);
+  oled.print("Opcion 4: ");
+  oled.println(opcion_correcta);
+  oled.display();
+  
+  delay(3000);
 }
