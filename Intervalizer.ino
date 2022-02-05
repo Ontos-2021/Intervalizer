@@ -82,15 +82,10 @@ void setup() {
 
   // Bienvenida al juego
   saludar();
+  delay(2000);
 }
 
 void loop() {
-  // Escribimos algo en la pantalla OLED
-  oled.clearDisplay();
-  oled.setCursor(28, 25);
-  oled.setTextSize(1, 2);
-  oled.print("Intervalizer");
-  oled.display();
   
   // Por ahora no será muy sofisticado el sistema. Elegiré una nota del medio para que nunca me tire error al elegir la segunda nota.
   // Primero elegimos la primera nota al azar
@@ -109,6 +104,14 @@ void loop() {
 
  // Ahora emitimos los sonidos
  emitirIntervalos(primer_nota, segunda_nota);
+
+ // Imprimir intervalo 
+  oled.clearDisplay();
+  oled.setCursor(0,0);
+  oled.setTextSize(2);
+  oled.print("Este es el Intervalo: ");
+  oled.println(intervalo);
+  oled.display();
 }
 
 void saludar(){
@@ -136,7 +139,6 @@ void saludar(){
   oled.setCursor(18, 40);
   oled.println("musical");
   oled.display();
-  delay(2000);
 }
 
 double elegirPrimerNota(int numero_random) {
