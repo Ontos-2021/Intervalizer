@@ -96,35 +96,18 @@ void loop() {
 
   // Elegimos la primer nota al azar
   int numero_random = random(9, 17); 
-  double primer_nota = notas_musicales[numero_random]; // En este caso, se podrá elegir desde la novena nota hasta la décimosexta.
-  Serial.print("Esta es la primer nota: ");
-  Serial.println(primer_nota);
+  double primer_nota =elegirPrimerNota(numero_random);
   
   // Elegimos al azar el intervalo
-  int intervalo = intervalos[random(0,17)];
-  Serial.print("Este es el intervalo: ");
-  Serial.println(intervalo);
+  int intervalo = elegirIntervalo();
 
   // Definimos la segunda nota en base al intervalo
-  double segunda_nota = notas_musicales[numero_random + intervalo];
-
-  Serial.print("Este es la segunda nota: ");
-  Serial.println(segunda_nota);
+  double segunda_nota = elegirSegundaNota(intervalo, numero_random);
 
   Serial.println("-------");
 
  // Ahora emitimos los sonidos
- tone(BUZZER, primer_nota, 200);
- analogWrite(LED_R, 255);
- delay(400);
- analogWrite(LED_R, 0);
- 
- tone(BUZZER, segunda_nota, 200);
- analogWrite(LED_G, 230);
- delay(400);
- analogWrite(LED_G, 0);
-
- delay(2700); 
+ emitirIntervalos(primer_nota, segunda_nota);
 }
 
 void saludar(){
@@ -153,4 +136,39 @@ void saludar(){
   oled.println("musical");
   oled.display();
   delay(2000);
+}
+
+double elegirPrimerNota(int numero_random) {
+  double primer_nota = notas_musicales[numero_random]; // En este caso, se podrá elegir desde la novena nota hasta la décimosexta.
+  Serial.print("Esta es la primer nota: ");
+  Serial.println(primer_nota);
+  return primer_nota;
+}
+
+int elegirIntervalo() {
+  int intervalo = intervalos[random(0,17)];
+  Serial.print("Este es el intervalo: ");
+  Serial.println(intervalo);
+  return intervalo;
+}
+
+double elegirSegundaNota(int intervalo, int numero_random) {
+  double segunda_nota = notas_musicales[numero_random + intervalo];
+  Serial.print("Este es la segunda nota: ");
+  Serial.println(segunda_nota);
+  return segunda_nota;
+}
+
+void emitirIntervalos(double primer_nota, double segunda_nota){
+ tone(BUZZER, primer_nota, 200);
+ analogWrite(LED_R, 255);
+ delay(400);
+ analogWrite(LED_R, 0);
+ 
+ tone(BUZZER, segunda_nota, 200);
+ analogWrite(LED_G, 230);
+ delay(400);
+ analogWrite(LED_G, 0);
+
+ delay(2700); 
 }
