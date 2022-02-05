@@ -71,6 +71,10 @@ void setup() {
   pinMode(LED_G, OUTPUT);
   pinMode(LED_B, OUTPUT);
 
+  // RandomSeed - Esto permitirá que la secuencia de números
+  // siempre sea distinta.
+  randomSeed(analogRead(A0));
+
   // Iniciamos la pantalla OLED
   Wire.begin();
   oled.begin(SSD1306_SWITCHCAPVCC, 0X3C);
@@ -88,7 +92,7 @@ void setup() {
   oled.println("Intervalizer");
   
   oled.display();
-  delay(2750);
+  delay(2250);
 
   oled.clearDisplay();
   oled.setTextColor(WHITE);
@@ -100,7 +104,7 @@ void setup() {
   oled.setCursor(18, 40);
   oled.println("musical");
   oled.display();
-  delay(2400);
+  delay(2000);
 }
 
 void loop() {
