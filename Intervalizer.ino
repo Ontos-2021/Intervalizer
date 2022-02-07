@@ -98,9 +98,6 @@ void loop() {
 
   Serial.println("-------");
 
- // Ahora emitimos los sonidos
- emitirIntervalos(primer_nota, segunda_nota);
-
  // Ahora generamos las opciones posibles
  // En este caso serán opcion_correcta, opcion_1, opcion_2, opcion_3
  // Las 3 restantes serán incorrectas y distintas entre sí.
@@ -112,6 +109,9 @@ void loop() {
 
  // Ahora imprimimos en la pantalla las opciones
  imprimirOpciones(opcion_correcta, opcion_1, opcion_2, opcion_3);
+
+ // Ahora emitimos los sonidos
+ emitirIntervalos(primer_nota, segunda_nota);
 }
 
 void saludar(){
@@ -197,7 +197,7 @@ void imprimirOpciones(int opcion_correcta, int opcion_1, int opcion_2, int opcio
   oled.clearDisplay();
   oled.setTextColor(WHITE);
   oled.setCursor(0, 0);
-  oled.setTextSize(1);
+  oled.setTextSize(1, 2);
   
   oled.print("Opcion 1: ");
   oled.println(opcion_1);
@@ -206,8 +206,6 @@ void imprimirOpciones(int opcion_correcta, int opcion_1, int opcion_2, int opcio
   oled.print("Opcion 3: ");
   oled.println(opcion_3);
   oled.print("Opcion 4: ");
-  oled.println(opcion_correcta);
+  oled.print(opcion_correcta);
   oled.display();
-  
-  delay(3000);
 }
