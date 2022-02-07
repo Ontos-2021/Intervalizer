@@ -1,4 +1,3 @@
-
 // Primero definimos variables para las entradas físicas del Arduino y sus respectivos componentes.
 #define BUZZER 9
 #define BOTON_1 2 
@@ -82,12 +81,9 @@ void setup() {
 
   // Bienvenida al juego
   saludar();
-  delay(2000);
 }
 
 void loop() {
-  
-  // Por ahora no será muy sofisticado el sistema. Elegiré una nota del medio para que nunca me tire error al elegir la segunda nota.
   // Primero elegimos la primera nota al azar
 
   // Elegimos la primer nota al azar
@@ -105,13 +101,17 @@ void loop() {
  // Ahora emitimos los sonidos
  emitirIntervalos(primer_nota, segunda_nota);
 
- // Imprimir intervalo 
-  oled.clearDisplay();
-  oled.setCursor(0,0);
-  oled.setTextSize(2);
-  oled.print("Este es el Intervalo: ");
-  oled.println(intervalo);
-  oled.display();
+ // Ahora generamos las opciones posibles
+ // En este caso serán opcion_correcta, opcion_1, opcion_2, opcion_3
+ // Las 3 restantes serán incorrectas y distintas entre sí.
+ 
+ int opcion_correcta = definirIntervaloCorrecto(intervalo);
+ int opcion_1 = generarIntervaloIncorrecto(intervalo);
+ int opcion_2 = generarIntervaloIncorrecto(intervalo);
+ int opcion_3 = generarIntervaloIncorrecto(intervalo);
+
+ // Ahora imprimimos en la pantalla las opciones
+ imprimirOpciones(opcion_correcta, opcion_1, opcion_2, opcion_3);
 }
 
 void saludar(){
@@ -139,9 +139,11 @@ void saludar(){
   oled.setCursor(18, 40);
   oled.println("musical");
   oled.display();
+  delay(2000);
 }
 
 double elegirPrimerNota(int numero_random) {
+  // Por ahora no será muy sofisticado el sistema. Elegiré una nota del medio para que nunca me tire error al elegir la segunda nota.
   double primer_nota = notas_musicales[numero_random]; // En este caso, se podrá elegir desde la novena nota hasta la décimosexta.
   Serial.print("Esta es la primer nota: ");
   Serial.println(primer_nota);
@@ -174,4 +176,38 @@ void emitirIntervalos(double primer_nota, double segunda_nota){
  analogWrite(LED_G, 0);
 
  delay(2700); 
+}
+
+int definirIntervaloCorrecto(int intervalo){
+  if (intervalo < 0) {
+    intervalo = intervalo * -1;
+  }
+  return intervalo;
+}
+
+int generarIntervaloIncorrecto(int intervalo) {
+  int intervalo_incorrecto = random(0, 11);
+  while (intervalo == intervalo_incorrecto) {
+    intervalo_incorrecto = random(0, 11);
+  };
+  return intervalo_incorrecto;
+}
+
+void imprimirOpciones(int opcion_correcta, int opcion_1, int opcion_2, int opcion_3) {
+  oled.clearDisplay();
+  oled.setTextColor(WHITE);
+  oled.setCursor(0, 0);
+  oled.setTextSize(1);
+  
+  oled.print("Opcion 1: ");
+  oled.println(opcion_1);
+  oled.print("Opcion 2: ");
+  oled.println(opcion_2);
+  oled.print("Opcion 3: ");
+  oled.println(opcion_3);
+  oled.print("Opcion 4: ");
+  oled.println(opcion_correcta);
+  oled.display();
+  
+  delay(3000);
 }
