@@ -109,7 +109,7 @@ void loop() {
 
  // Ahora imprimimos en la pantalla las opciones
  imprimirOpciones(opcion_correcta, opcion_1, opcion_2, opcion_3);
-
+ 
  // Ahora emitimos los sonidos
  emitirIntervalos(primer_nota, segunda_nota);
 }
@@ -200,12 +200,41 @@ void imprimirOpciones(int opcion_correcta, int opcion_1, int opcion_2, int opcio
   oled.setTextSize(1, 2);
   
   oled.print("Opcion 1: ");
-  oled.println(opcion_1);
+  oled.println(recogerNombreIntervalo(opcion_1));
   oled.print("Opcion 2: ");
-  oled.println(opcion_2);
+  oled.println(recogerNombreIntervalo(opcion_2));
   oled.print("Opcion 3: ");
-  oled.println(opcion_3);
+  oled.println(recogerNombreIntervalo(opcion_3));
   oled.print("Opcion 4: ");
-  oled.print(opcion_correcta);
+  oled.print(recogerNombreIntervalo(opcion_correcta));
   oled.display();
 }
+
+String recogerNombreIntervalo(int intervalo) {
+  switch (intervalo) {
+    case 0:
+    return  "Unisono";
+    case 1:
+    return  "Segunda Menor";
+    case 2:
+    return  "Segunda Mayor";
+    case 3:
+    return  "Tercera Menor";
+    case 4:
+    return  "Tercera Mayor";
+    case 5:
+    return "Cuarta Justa";
+    case 6:
+    return "Quinta Justa";
+    case 7:
+    return "Sexta Menor";
+    case 8:
+    return "Sexta Mayor";
+    case 9:
+    return "Septima Menor";
+    case 10:
+    return "Septima Mayor";
+    case 11:
+    return "Octava";
+  }
+};
