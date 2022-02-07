@@ -199,21 +199,17 @@ void imprimirOpciones(int opcion_correcta, int opcion_1, int opcion_2, int opcio
   oled.setCursor(0, 0);
   oled.setTextSize(1, 2);
   
-  oled.print("Opcion 1: ");
-  oled.println(recogerNombreIntervalo(opcion_1));
-  oled.print("Opcion 2: ");
-  oled.println(recogerNombreIntervalo(opcion_2));
-  oled.print("Opcion 3: ");
-  oled.println(recogerNombreIntervalo(opcion_3));
-  oled.print("Opcion 4: ");
-  oled.print(recogerNombreIntervalo(opcion_correcta));
+  oled.print("Opcion 1: ");;
+  // oled.print("Esta deberia ser la opcion 1");
   oled.display();
+
+  Serial.print(recogerNombreIntervalo(1));
 }
 
 String recogerNombreIntervalo(int intervalo) {
   switch (intervalo) {
     case 0:
-    return  "Unisono";
+    return "Unisono";
     case 1:
     return  "Segunda Menor";
     case 2:
