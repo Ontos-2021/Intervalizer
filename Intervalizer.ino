@@ -56,6 +56,9 @@ double notas_musicales[] = {
 // Definimos los intervalos disponibles. En este caso, sólo serán 3ra Mayor, 4ta Justa, 5ta Justa y 6ta mayor.
 int intervalos[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2, -3, -4, -5, -6, -7, -8, -9};
 
+// Variables globales
+int intervalo_incorrecto_1, intervalo_incorrecto_2, intervalo_incorrecto_3;
+
 void setup() {
   // put your setup code here, to run once:
   
@@ -102,13 +105,15 @@ void loop() {
  // En este caso serán opcion_correcta, opcion_1, opcion_2, opcion_3
  // Las 3 restantes serán incorrectas y distintas entre sí.
  
- int opcion_correcta = definirIntervaloCorrecto(intervalo);
- int opcion_1 = generarIntervaloIncorrecto(intervalo);
- int opcion_2 = generarIntervaloIncorrecto(intervalo);
- int opcion_3 = generarIntervaloIncorrecto(intervalo);
-
+ int intervalo_correcto = definirIntervaloCorrecto(intervalo);
+ generarIntervalosIncorrectos(intervalo);
+ 
+ // Aquí habría que llamar a la función "revolver"
+ // int opcion_1, opcion_2, opcion_3, opcion_4;
+ // revolver(intervalo_correcto, intervalo_incorrecto_1, intervalo_incorrecto_2, intervalo_incorrecto_3);
+  
  // Ahora imprimimos en la pantalla las opciones
- imprimirOpciones(opcion_correcta, opcion_1, opcion_2, opcion_3);
+ imprimirOpciones(intervalo_correcto, intervalo_incorrecto_1, intervalo_incorrecto_2, intervalo_incorrecto_3);
 
  // Ahora emitimos los sonidos
  emitirIntervalos(primer_nota, segunda_nota);
@@ -178,6 +183,8 @@ void emitirIntervalos(double primer_nota, double segunda_nota){
  delay(2700); 
 }
 
+// Funciones relacionadas con definir las opciones
+
 int definirIntervaloCorrecto(int intervalo){
   if (intervalo < 0) {
     intervalo = intervalo * -1;
@@ -185,12 +192,24 @@ int definirIntervaloCorrecto(int intervalo){
   return intervalo;
 }
 
-int generarIntervaloIncorrecto(int intervalo) {
-  int intervalo_incorrecto = random(0, 11);
-  while (intervalo == intervalo_incorrecto) {
-    intervalo_incorrecto = random(0, 11);
+void generarIntervalosIncorrectos(int intervalo) {
+  intervalo_incorrecto_1 = random(0, 11);
+  while (intervalo == intervalo_incorrecto_1) {
+    intervalo_incorrecto_1 = random(0, 11);
   };
-  return intervalo_incorrecto;
+
+  intervalo_incorrecto_2 = random(0, 11);
+  while (intervalo_incorrecto_1 == intervalo_incorrecto_2 || intervalo_incorrecto_2 == intervalo) {
+    intervalo_incorrecto_2 = random(0, 11);
+  }
+  intervalo_incorrecto_3 = random(0, 11);
+  while (intervalo_incorrecto_2 == intervalo_incorrecto_3 || intervalo_incorrecto_1 == intervalo_incorrecto_3 || intervalo_incorrecto_3 == intervalo) {
+    intervalo_incorrecto_3 = random(0, 11);
+  }
+}
+
+void revolver(int opcion_correcta, int opcion_1, int opcion_2, int opcion_3) {
+  Serial.print("Se activó la función Revolver");
 }
 
 void imprimirOpciones(int opcion_correcta, int opcion_1, int opcion_2, int opcion_3) {
@@ -200,12 +219,21 @@ void imprimirOpciones(int opcion_correcta, int opcion_1, int opcion_2, int opcio
   oled.setTextSize(1, 2);
   
   oled.print("Opcion 1: ");
-  oled.println(opcion_1);
+  oled.print(opcion_1);
+  oled.println(" st");
+  
   oled.print("Opcion 2: ");
-  oled.println(opcion_2);
+  oled.print(opcion_2);
+  oled.println(" st");
+  
   oled.print("Opcion 3: ");
-  oled.println(opcion_3);
-  oled.print("Opcion 4: ");
+  oled.print(opcion_3);
+  oled.println(" st");
+
+  // Por alguna razón cuando coloco "Opcion 4: ", se buggea. Y cuando es "Opcion 3: ", no.
+  oled.print("Opcion 3: ");
   oled.print(opcion_correcta);
+  oled.print(" st");
+  
   oled.display();
 }
