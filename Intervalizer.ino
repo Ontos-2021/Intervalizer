@@ -58,6 +58,7 @@ int intervalos[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2, -3, -4, -5, -6, -7, -8, -
 
 // Variables globales
 int intervalo_incorrecto_1, intervalo_incorrecto_2, intervalo_incorrecto_3;
+int opcion_1, opcion_2, opcion_3, opcion_4;
 
 void setup() {
   // put your setup code here, to run once:
@@ -109,8 +110,7 @@ void loop() {
  generarIntervalosIncorrectos(intervalo);
  
  // Aquí habría que llamar a la función "revolver"
- // int opcion_1, opcion_2, opcion_3, opcion_4;
- // revolver(intervalo_correcto, intervalo_incorrecto_1, intervalo_incorrecto_2, intervalo_incorrecto_3);
+ revolverOpciones();
   
  // Ahora imprimimos en la pantalla las opciones
  imprimirOpciones(intervalo_correcto, intervalo_incorrecto_1, intervalo_incorrecto_2, intervalo_incorrecto_3);
@@ -208,8 +208,59 @@ void generarIntervalosIncorrectos(int intervalo) {
   }
 }
 
-void revolver(int opcion_correcta, int opcion_1, int opcion_2, int opcion_3) {
-  Serial.print("Se activó la función Revolver");
+void revolverOpciones() {
+  //Serial.println("Se activo la función Revolver opciones"); // Al parecer esta línea buggea
+  Serial.println("Hola!"); // Y por alguna extraña razón esta línea no buggea
+  boolean flag = false;
+  // Primero crearé un algoritmo para revolver los index. En este caso de 0 a 3.
+  int indexes[4];
+  indexes[0] = random(0, 3);
+  while (!flag) {
+    indexes[1] = random(0, 3);
+    if (indexes[0] != indexes[1]) {
+      flag = true;
+    }
+  };
+  
+  flag = false;
+  while (!flag) {
+    indexes[2] = random(0, 3);
+    if (indexes[0] != indexes[2] || indexes[1] != indexes[2]) {
+      flag = true;
+    }
+  };
+
+  flag = false;
+  while (!flag) {
+    indexes[3] = random(0, 3);
+    if (indexes[0] != indexes[3] || indexes[1] != indexes[3] || indexes[2] != indexes[3]) {
+      flag = true;
+    }
+  };
+
+  
+
+  oled.clearDisplay();
+  oled.setTextColor(WHITE);
+  oled.setCursor(0, 0);
+  oled.setTextSize(1, 2);
+  //for (byte i = 0; i < 4; i = i + 1) {
+  //  oled.println(indexes[i]);
+  //};
+
+  oled.print("Test");
+  
+  oled.display();
+  delay(3000);
+  int x;
+  while (x < 4){
+    Serial.println(indexes[x]);
+    x++;
+  }
+
+  //for (byte i = 0; i < 5; i = i + 1) {
+  //Serial.println(indexes[i]);
+  //}
 }
 
 void imprimirOpciones(int opcion_correcta, int opcion_1, int opcion_2, int opcion_3) {
