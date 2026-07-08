@@ -7,6 +7,9 @@ y este proyecto adhiere a [Versionado Semántico](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Added
+- `Documentación/AUDITORIA_360.md`: registro de las dos auditorías (360 inicial
+  técnica+producto+innovación+monetización, y re-evaluación estratégica del salto
+  comercial/funcional) realizadas sobre el proyecto.
 - Arquitectura modular del firmware: `config.h`, `intervals`, `input`, `audio`,
   `ui`, `eeprom_store`, `game` (FSM) — el sketch principal queda en 25 líneas.
 - Máquina de estados finita para el juego: `BOOT → MENU → JUGAR → RESULTADO →
