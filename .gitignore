@@ -1,3 +1,24 @@
-*.fzz
-*.idea
+# PlatformIO / Arduino IDE build artifacts
+.pio/
+build/
+*.hex
+*.elf
+*.bin
+*.map
+
+# IDEs
+.vscode/
+.idea/
 *.obsidian
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup / temp
+*.tmp
+*.bak
+
+# Hardware source originals
+*.fzz
